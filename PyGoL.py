@@ -24,9 +24,9 @@ GRID_HEIGHT   =  48
 
 # Define the size of the window
 CELL_SIZE     = 10
-WINDOW_WIDTH  = GRID_WIDTH  * CELL_SIZE
-WINDOW_HEIGHT = GRID_HEIGHT * CELL_SIZE
-PIXEL_OFFSET  = 10  # GUI Pixel offset to get some margin of error, since Linux and Mac handle window sizes differently and cells might geht cut off
+CANVAS_WIDTH  = GRID_WIDTH  * CELL_SIZE
+CANVAS_HEIGHT = GRID_HEIGHT * CELL_SIZE
+CANVAS_OFFSET = 10  # GUI Pixel offset for Canvas to get some errormargin, since Linux and Mac handle window sizes differently and cells might geht cut off
 
 
 # Create the grid to represent the cells
@@ -126,8 +126,8 @@ def draw_grid():
   canvas.delete("all")
   for x in range(GRID_WIDTH):
     for y in range(GRID_HEIGHT):
-      x1 = x * CELL_SIZE + (PIXEL_OFFSET/2)
-      y1 = y * CELL_SIZE + (PIXEL_OFFSET/2)
+      x1 = x * CELL_SIZE + (CANVAS_OFFSET/2)
+      y1 = y * CELL_SIZE + (CANVAS_OFFSET/2)
       x2 = x1 + CELL_SIZE
       y2 = y1 + CELL_SIZE
       if grid[x][y] == 1:
@@ -161,17 +161,17 @@ def life():
 window = tk.Tk()
 window.title("Game of Life")
 window.resizable(False, False)
-window.geometry(f"{WINDOW_WIDTH+PIXEL_OFFSET+120}x{WINDOW_HEIGHT+PIXEL_OFFSET}")
+window.geometry(f"{CANVAS_WIDTH+CANVAS_OFFSET+120}x{CANVAS_HEIGHT+CANVAS_OFFSET}")
 
 # Create a canvas to draw the grid
-canvas = tk.Canvas(window, width=WINDOW_WIDTH+PIXEL_OFFSET, height=WINDOW_HEIGHT+PIXEL_OFFSET) #, background="black")
+canvas = tk.Canvas(window, width=CANVAS_WIDTH+CANVAS_OFFSET, height=CANVAS_HEIGHT+CANVAS_OFFSET) #, background="black")
 canvas.pack()
 canvas.place(x=0, y=0)
 
 # Setup the slider for the speed of the simulation
 speed_slider = tk.Scale(window, from_=1, to=5, orient="horizontal", label="Speed [1-5]", variable=tk.IntVar(value=3))
 speed_slider.pack()
-speed_slider.place(x=WINDOW_WIDTH+20, y=10, width=100)
+speed_slider.place(x=CANVAS_WIDTH+20, y=10, width=100)
 window.bind("1", lambda e: speed_slider.set(1))
 window.bind("2", lambda e: speed_slider.set(2))
 window.bind("3", lambda e: speed_slider.set(3))
@@ -181,56 +181,56 @@ window.bind("5", lambda e: speed_slider.set(5))
 # Setup the random button which resets the grid
 random_button = tk.Button(window, text="[R]andom", command=lambda: init_grid(1))
 random_button.pack()
-random_button.place(x=WINDOW_WIDTH+20, y=90, width=100)
+random_button.place(x=CANVAS_WIDTH+20, y=90, width=100)
 window.bind("r", lambda e: init_grid(1))
 window.bind("R", lambda e: init_grid(1))
 
 # Setup the blinker button which resets the grid
 blinker_button = tk.Button(window, text="[B]linker", command=lambda: init_grid(2))
 blinker_button.pack()
-blinker_button.place(x=WINDOW_WIDTH+20, y=120, width=100)
+blinker_button.place(x=CANVAS_WIDTH+20, y=120, width=100)
 window.bind("b", lambda e: init_grid(2))
 window.bind("B", lambda e: init_grid(2))
 
 # Setup the glider button which resets the grid
 glider_button = tk.Button(window, text="[G]lider", command=lambda: init_grid(3))
 glider_button.pack()
-glider_button.place(x=WINDOW_WIDTH+20, y=150, width=100)
+glider_button.place(x=CANVAS_WIDTH+20, y=150, width=100)
 window.bind("g", lambda e: init_grid(3))
 window.bind("G", lambda e: init_grid(3))
 
 # Setup the glider gun button which resets the grid
 glider_gun_button = tk.Button(window, text="G[l]ider gun", command=lambda: init_grid(4))
 glider_gun_button.pack()
-glider_gun_button.place(x=WINDOW_WIDTH+20, y=180, width=100)
+glider_gun_button.place(x=CANVAS_WIDTH+20, y=180, width=100)
 window.bind("l", lambda e: init_grid(4))
 window.bind("L", lambda e: init_grid(4))
 
 # Setup the pentomino button which resets the grid
 pentomino_button = tk.Button(window, text="[P]entomino", command=lambda: init_grid(5))
 pentomino_button.pack()
-pentomino_button.place(x=WINDOW_WIDTH+20, y=210, width=100)
+pentomino_button.place(x=CANVAS_WIDTH+20, y=210, width=100)
 window.bind("p", lambda e: init_grid(5))
 window.bind("P", lambda e: init_grid(5))
 
 # Setup the diehard button which resets the grid
 diehard_button = tk.Button(window, text="[D]iehard", command=lambda: init_grid(6))
 diehard_button.pack()
-diehard_button.place(x=WINDOW_WIDTH+20, y=240, width=100)
+diehard_button.place(x=CANVAS_WIDTH+20, y=240, width=100)
 window.bind("d", lambda e: init_grid(6))
 window.bind("D", lambda e: init_grid(6))
 
 # Setup the acorn button which resets the grid
 acorn_button = tk.Button(window, text="[A]corn", command=lambda: init_grid(7))
 acorn_button.pack()
-acorn_button.place(x=WINDOW_WIDTH+20, y=270, width=100)
+acorn_button.place(x=CANVAS_WIDTH+20, y=270, width=100)
 window.bind("a", lambda e: init_grid(7))
 window.bind("A", lambda e: init_grid(7))
 
 # Setup the quit button which ends the simulation
 quit_button = tk.Button(window, text="[Q]uit", command=quit)
 quit_button.pack()
-quit_button.place(x=WINDOW_WIDTH+20, y=430, width=100)
+quit_button.place(x=CANVAS_WIDTH+20, y=430, width=100)
 window.bind("q", lambda e: quit())
 window.bind("Q", lambda e: quit())
 window.bind("<Escape>", lambda e: quit())
@@ -239,7 +239,7 @@ window.protocol("WM_DELETE_WINDOW", quit) # Clean quit on window close button
 # Print SW name and version to window
 label_sw = tk.Label(window, text=f"{SW_NAME} {SW_VERS}")
 label_sw.pack()
-label_sw.place(x=WINDOW_WIDTH+20, y=470, width=100, )
+label_sw.place(x=CANVAS_WIDTH+20, y=470, width=100, )
 
 # Initialize the simulation
 init_grid(1)
