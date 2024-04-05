@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-# Title:       PyGoL.py
-# Author:      Martin Ochs
-# License:     MIT
-# Description: A very basic python implementation for Conway's "Game of Life"
-#              using Tkinter for the GUI. The simulation can be controlled by
-#              the speed slider and the buttons for different initial states.
+# File:    PyGoL.py
+# Author:  Martin Ochs
+# License: MIT
+# Brief:   A very basic python implementation for Conway's "Game of Life"
+#          using Tkinter for the GUI. The simulation can be controlled by
+#          the speed slider and the buttons for different initial states.
 
 
 
