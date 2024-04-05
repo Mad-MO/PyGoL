@@ -18,14 +18,16 @@ import random
 SW_NAME = "PyGoL"
 SW_VERS = "v0.1"
 
-# Define the size of the window
-WINDOW_WIDTH  = 640
-WINDOW_HEIGHT = 480
-PIXEL_OFFSET  = 10  # GUI Pixel offset to get some margin of error, since Linux and Mac handle window sizes differently and cells might geht cut off
-
 # Define the size of the grid
 GRID_WIDTH    =  64
 GRID_HEIGHT   =  48
+
+# Define the size of the window
+CELL_SIZE     = 10
+WINDOW_WIDTH  = GRID_WIDTH  * CELL_SIZE
+WINDOW_HEIGHT = GRID_HEIGHT * CELL_SIZE
+PIXEL_OFFSET  = 10  # GUI Pixel offset to get some margin of error, since Linux and Mac handle window sizes differently and cells might geht cut off
+
 
 # Create the grid to represent the cells
 grid = [[0] * GRID_WIDTH * GRID_HEIGHT for _ in range(GRID_WIDTH * GRID_HEIGHT)]
@@ -122,14 +124,12 @@ def update_grid():
 # Function to draw the grid on the canvas
 def draw_grid():
   canvas.delete("all")
-  cell_width = WINDOW_WIDTH / GRID_WIDTH
-  cell_height = WINDOW_HEIGHT / GRID_HEIGHT
   for x in range(GRID_WIDTH):
     for y in range(GRID_HEIGHT):
-      x1 = x * cell_width + (PIXEL_OFFSET/2)
-      y1 = y * cell_height + (PIXEL_OFFSET/2)
-      x2 = x1 + cell_width
-      y2 = y1 + cell_height
+      x1 = x * CELL_SIZE + (PIXEL_OFFSET/2)
+      y1 = y * CELL_SIZE + (PIXEL_OFFSET/2)
+      x2 = x1 + CELL_SIZE
+      y2 = y1 + CELL_SIZE
       if grid[x][y] == 1:
         canvas.create_oval(x1, y1, x2, y2, fill="red", outline="darkred")
 
