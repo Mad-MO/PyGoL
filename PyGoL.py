@@ -146,15 +146,15 @@ def life():
   window.update()
 
   if   speed_slider.get() == 1: # Set timeout depending on speed_slider value
-    timeout = 1
+    timeout = 0
   elif speed_slider.get() == 2:
-    timeout = 10
+    timeout = 1
   elif speed_slider.get() == 3:
-    timeout = 100
+    timeout = 10
   elif speed_slider.get() == 4:
-    timeout = 250
+    timeout = 100
   else:
-    timeout = 500
+    timeout = 1000
   window.after(timeout, life)
 
 
