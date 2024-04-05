@@ -36,6 +36,7 @@ grid = [[0] * GRID_WIDTH * GRID_HEIGHT for _ in range(GRID_WIDTH * GRID_HEIGHT)]
 
 # Function to initialize the grid
 def init_grid(mode):
+  global grid
   for x in range(GRID_WIDTH):
     for y in range(GRID_HEIGHT):
       grid[x][y] = 0
@@ -43,6 +44,8 @@ def init_grid(mode):
     for x in range(GRID_WIDTH):
       for y in range(GRID_HEIGHT):
         grid[x][y] = random.choice([0, 1])
+    grid = update_grid()
+    grid = update_grid() # Update twice to reduce the changes after that
   elif(mode == 2): # Blinker
     grid[1][0] = 1
     grid[1][1] = 1
@@ -138,7 +141,6 @@ def draw_grid():
 # Function to handle one life cycle of the simulation
 def life():
   global grid
-
   grid = update_grid()
   draw_grid()
   window.update()
