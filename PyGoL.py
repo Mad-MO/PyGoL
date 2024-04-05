@@ -31,12 +31,15 @@ CANVAS_OFFSET = 10  # GUI Pixel offset for Canvas to get some errormargin, since
 
 # Create the grid to represent the cells
 grid = [[0] * GRID_WIDTH * GRID_HEIGHT for _ in range(GRID_WIDTH * GRID_HEIGHT)]
+cycle_counter = 0
 
 
 
 # Function to initialize the grid
 def init_grid(mode):
   global grid
+  global cycle_counter
+  cycle_counter = 0
   for x in range(GRID_WIDTH):
     for y in range(GRID_HEIGHT):
       grid[x][y] = 0
@@ -101,6 +104,8 @@ def init_grid(mode):
 
 # Function to update the grid based on the game of life rules
 def update_grid():
+  global cycle_counter
+  cycle_counter += 1
   new_grid = [[0] * GRID_WIDTH * GRID_HEIGHT for _ in range(GRID_WIDTH * GRID_HEIGHT)]
   for x in range(GRID_WIDTH):
     for y in range(GRID_HEIGHT):
@@ -126,6 +131,7 @@ def update_grid():
 
 # Function to draw the grid on the canvas
 def draw_grid():
+  cells_alive = 0
   canvas.delete("all")
   for x in range(GRID_WIDTH):
     for y in range(GRID_HEIGHT):
@@ -135,6 +141,9 @@ def draw_grid():
       y2 = y1 + CELL_SIZE
       if grid[x][y] == 1:
         canvas.create_oval(x1, y1, x2, y2, fill="red", outline="darkred")
+        cells_alive += 1
+  label_cycle.config(text=f"Cycle: {cycle_counter}")
+  label_cells.config(text=f"Cells: {cells_alive}")
 
 
 
@@ -229,6 +238,16 @@ acorn_button.place(x=CANVAS_WIDTH+20, y=270, width=100)
 window.bind("a", lambda e: init_grid(7))
 window.bind("A", lambda e: init_grid(7))
 
+# Setup the cycle counter label
+label_cycle = tk.Label(window, text="Cycle:", anchor="w")
+label_cycle.pack()
+label_cycle.place(x=CANVAS_WIDTH+20, y=310, width=100)
+
+# Setup the cells alive label
+label_cells = tk.Label(window, text="Cells:", anchor="w")
+label_cells.pack()
+label_cells.place(x=CANVAS_WIDTH+20, y=330, width=100)
+
 # Setup the quit button which ends the simulation
 quit_button = tk.Button(window, text="[Q]uit", command=quit)
 quit_button.pack()
@@ -239,14 +258,14 @@ window.bind("<Escape>", lambda e: quit())
 window.protocol("WM_DELETE_WINDOW", quit) # Clean quit on window close button
 
 # Print SW name and version to window
-label_sw = tk.Label(window, text=f"{SW_NAME} {SW_VERS}")
+label_sw = tk.Label(window, text=f"{SW_NAME} {SW_VERS}", anchor="e")
 label_sw.pack()
 label_sw.place(x=CANVAS_WIDTH+20, y=470, width=100, )
 
 # Initialize the simulation
 init_grid(1)
+window.after(1, life)
 
 # Run the Tkinter event loop
-window.after(1, life)
 window.mainloop()
 
