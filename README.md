@@ -1,15 +1,9 @@
 
 # PyGoL - Python Game of Life
 
-A very basic python implementation for Conway's "Game of Life" using Tkinter for the GUI
+A very basic python implementation for Conway's "Game of Life".
+The program uses Tkinter for the GUI. Therefore this should run on any basic Python Installation.
 
 <https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life>
 
-Running on Mac
-![Screenshot Mac](./ScreenshotMac.png)
-
-Running on Linux
-![Screenshot Linux](./ScreenshotLinux.png)
-
-Running on Windows
-![Screenshot Linux](./ScreenshotWindows.png)
+![Screenshot](./Screenshot.png)
