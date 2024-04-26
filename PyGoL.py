@@ -47,8 +47,8 @@ def init_grid(mode):
     for x in range(GRID_WIDTH):
       for y in range(GRID_HEIGHT):
         grid[x][y] = random.choice([0, 1])
-    grid = update_grid()
-    grid = update_grid() # Update twice to reduce the changes after that
+    for i in range(10):
+      grid = update_grid() # Update several times to reduce huge grid changes after start
   elif(mode == 2): # Blinker
     grid[1][0] = 1
     grid[1][1] = 1
