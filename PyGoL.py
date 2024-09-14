@@ -154,13 +154,13 @@ def life():
   draw_grid()
   window.update()
 
-  if   speed_slider.get() == 1: # Set timeout depending on speed_slider value
+  if   speed_slider.get() == 5: # Set timeout depending on speed_slider value
     timeout = 0
-  elif speed_slider.get() == 2:
+  elif speed_slider.get() == 4:
     timeout = 1
   elif speed_slider.get() == 3:
     timeout = 10
-  elif speed_slider.get() == 4:
+  elif speed_slider.get() == 2:
     timeout = 100
   else:
     timeout = 1000
