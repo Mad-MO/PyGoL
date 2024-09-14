@@ -16,7 +16,7 @@ import random
 
 # Define SW name and Version
 SW_NAME = "PyGoL"
-SW_VERS = "v0.1"
+SW_VERS = "v0.3"
 
 # Define the size of the grid
 GRID_WIDTH    =  64
