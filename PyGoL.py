@@ -19,8 +19,8 @@ SW_NAME = "PyGoL"
 SW_VERS = "v0.3"
 
 # Define the size of the grid
-GRID_WIDTH    =  64
-GRID_HEIGHT   =  48
+GRID_WIDTH    =  150
+GRID_HEIGHT   =  100
 
 # Define the size of the window
 CELL_SIZE     = 10
@@ -30,7 +30,7 @@ CANVAS_OFFSET = 10  # GUI Pixel offset for Canvas to get some errormargin, since
 
 
 # Create the grid to represent the cells
-grid = [[0] * GRID_WIDTH * GRID_HEIGHT for _ in range(GRID_WIDTH * GRID_HEIGHT)]
+grid = [[0] * GRID_HEIGHT for _ in range(GRID_WIDTH)]
 cycle_counter = 0
 
 
@@ -106,7 +106,7 @@ def init_grid(mode):
 def update_grid():
   global cycle_counter
   cycle_counter += 1
-  new_grid = [[0] * GRID_WIDTH * GRID_HEIGHT for _ in range(GRID_WIDTH * GRID_HEIGHT)]
+  new_grid = [[0] * GRID_HEIGHT for _ in range(GRID_WIDTH)]
   for x in range(GRID_WIDTH):
     for y in range(GRID_HEIGHT):
       neighbors = 0
