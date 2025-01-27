@@ -19,8 +19,8 @@ SW_NAME = "PyGoL"
 SW_VERS = "v0.4"
 
 # Define the size of the grid
-GRID_WIDTH    =  130
-GRID_HEIGHT   =   80
+GRID_WIDTH    =  128
+GRID_HEIGHT   =   64
 
 # Define the size of the window
 CELL_SIZE     = 10
