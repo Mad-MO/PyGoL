@@ -143,7 +143,8 @@ def draw_grid():
       x2 = x1 + CELL_SIZE
       y2 = y1 + CELL_SIZE
       if grid[x][y] == 1:
-        canvas.create_oval(x1, y1, x2, y2, fill="red", outline="darkred")
+        #canvas.create_oval(x1, y1, x2, y2, fill="red", outline="darkred")
+        canvas.create_rectangle(x1, y1, x2, y2, fill="red", outline="darkred")
         cells_alive += 1
   label_cycle.config(text=f"Cycle: {cycle_counter}")
   label_cells.config(text=f"Cells: {cells_alive}")
