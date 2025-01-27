@@ -32,6 +32,10 @@ CANVAS_OFFSET = 10  # GUI Pixel offset for Canvas to get some errormargin, since
 # Create the grid to represent the cells
 grid = [[0] * GRID_HEIGHT for _ in range(GRID_WIDTH)]
 cycle_counter = 0
+cells_alive = 0
+END_DET_CNT = 60
+end_det = [0] * END_DET_CNT
+end_det_pos = 0
 
 
 
@@ -104,8 +108,6 @@ def init_grid(mode):
 
 # Function to update the grid based on the game of life rules
 def update_grid():
-  global cycle_counter
-  cycle_counter += 1
   new_grid = [[0] * GRID_HEIGHT for _ in range(GRID_WIDTH)]
   for x in range(GRID_WIDTH):
     for y in range(GRID_HEIGHT):
@@ -131,6 +133,7 @@ def update_grid():
 
 # Function to draw the grid on the canvas
 def draw_grid():
+  global cells_alive
   cells_alive = 0
   canvas.delete("all")
   for x in range(GRID_WIDTH):
@@ -147,9 +150,36 @@ def draw_grid():
 
 
 
+# Function to detect the end of the simulation
+def end_detection():
+  global end_det
+  global end_det_pos
+  global cells_alive
+  end_det[end_det_pos] = cells_alive
+  end_det_pos = (end_det_pos + 1) % END_DET_CNT
+  if cells_alive == 0:
+    return True
+  if cycle_counter > END_DET_CNT:                          # At least 100 cycles needed for detection
+    for pattern in range (1, int(END_DET_CNT/2)):          # Test pattern in the length of 1 to half of the buffer
+      for testpos in range (pattern, END_DET_CNT):
+        if end_det[testpos] != end_det[testpos % pattern]: # Pattern not found? -> End loop and test next pattern
+          break
+        if testpos == END_DET_CNT - 1:                     # End of loop reached? -> Pattern found!
+          return True
+  return False
+
+
+
 # Function to handle one life cycle of the simulation
 def life():
   global grid
+  global cycle_counter
+
+  if not end_detection():
+    cycle_counter += 1
+  else:
+    speed_slider.set(1)
+
   grid = update_grid()
   draw_grid()
   window.update()
