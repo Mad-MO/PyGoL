@@ -160,7 +160,7 @@ def end_detection():
   end_det_pos = (end_det_pos + 1) % END_DET_CNT
   if cells_alive == 0:
     return True
-  if cycle_counter > END_DET_CNT:                          # At least 100 cycles needed for detection
+  if cycle_counter > END_DET_CNT:                          # At least END_DET_CNT cycles needed for detection
     for pattern in range (1, int(END_DET_CNT/2)):          # Test pattern in the length of 1 to half of the buffer
       for testpos in range (pattern, END_DET_CNT):
         if end_det[testpos] != end_det[testpos % pattern]: # Pattern not found? -> End loop and test next pattern
