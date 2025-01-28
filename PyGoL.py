@@ -156,8 +156,8 @@ def end_detection():
   global end_det
   global end_det_pos
   global cells_alive
-  end_det[end_det_pos] = cells_alive
   end_det_pos = (end_det_pos + 1) % END_DET_CNT
+  end_det[end_det_pos] = cells_alive
   if cells_alive == 0:
     return True
   if cycle_counter > END_DET_CNT:                          # At least END_DET_CNT cycles needed for detection
