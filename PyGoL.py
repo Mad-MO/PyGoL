@@ -178,8 +178,6 @@ def life():
 
   if not end_detection():
     cycle_counter += 1
-  else:
-    speed_slider.set(1)
 
   grid = update_grid()
   draw_grid()
@@ -211,7 +209,7 @@ canvas.pack()
 canvas.place(x=0, y=0)
 
 # Setup the slider for the speed of the simulation
-speed_slider = tk.Scale(window, from_=1, to=5, orient="horizontal", label="Speed [1-5]", variable=tk.IntVar(value=3))
+speed_slider = tk.Scale(window, from_=1, to=5, orient="horizontal", label="Speed [1-5]", variable=tk.IntVar(value=5))
 speed_slider.pack()
 speed_slider.place(x=CANVAS_WIDTH+20, y=10, width=100)
 window.bind("1", lambda e: speed_slider.set(1))
